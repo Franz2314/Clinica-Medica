@@ -1,0 +1,4 @@
+app.persistence.mode=POSTGRES
+postgres.url=jdbc:postgresql://localhost:5432/clinicamedica_avance2
+postgres.user=postgres
+postgres.password=TU_CLAVE

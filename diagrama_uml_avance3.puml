@@ -1,0 +1,892 @@
+@startuml
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Segoe UI
+skinparam defaultFontSize 12
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam class {
+  BorderColor #156F9A
+  BackgroundColor #E8F4FD
+  HeaderBackgroundColor #156F9A
+  HeaderFontColor #FFFFFF
+  FontColor #1A1A1A
+}
+
+skinparam interface {
+  BorderColor #2E8B57
+  BackgroundColor #E6F9ED
+  HeaderBackgroundColor #2E8B57
+  HeaderFontColor #FFFFFF
+  FontColor #1A1A1A
+}
+
+skinparam enum {
+  BorderColor #8B4513
+  BackgroundColor #FFF3E0
+  HeaderBackgroundColor #8B4513
+  HeaderFontColor #FFFFFF
+  FontColor #1A1A1A
+}
+
+skinparam package {
+  BorderColor #444444
+  BackgroundColor #FAFAFA
+  FontColor #156F9A
+  FontStyle bold
+  BorderThickness 1.5
+}
+
+skinparam arrow {
+  Color #333333
+  FontColor #156F9A
+}
+
+hide empty members
+
+' ==================== PAQUETE: MODELOS ====================
+package "modelos" #F0F8FF {
+
+  abstract class Persona {
+    - String codigo
+    - String nombres
+    - String apellidos
+    - String telefono
+    ..
+    # Persona(String, String, String, String)
+    + getCodigo() : String
+    + getNombres() : String
+    + getApellidos() : String
+    + getTelefono() : String
+    + getNombreCompleto() : String
+    + setNombres(String) : void
+    + setApellidos(String) : void
+    + setTelefono(String) : void
+  }
+
+  class Paciente {
+    - String dni
+    - int edad
+    - String genero
+    - String tipoSangre
+    - String alergias
+    - String correo
+    - boolean tieneSis
+    - String numeroSis
+    ..
+    + getDni() : String
+    + getEdad() : int
+    + getGenero() : String
+    + getTipoSangre() : String
+    + getAlergias() : String
+    + getCorreo() : String
+    + isTieneSis() : boolean
+    + getNumeroSis() : String
+    + setDni(String) : void
+    + setEdad(int) : void
+    + setGenero(String) : void
+    + setTipoSangre(String) : void
+    + setAlergias(String) : void
+    + setCorreo(String) : void
+    + setTieneSis(boolean) : void
+    + setNumeroSis(String) : void
+    + toString() : String
+  }
+
+  class Medico {
+    - String cmp
+    - Especialidad especialidad
+    - String correo
+    - String turno
+    ..
+    + getCmp() : String
+    + getEspecialidad() : Especialidad
+    + getCorreo() : String
+    + getTurno() : String
+    + setCmp(String) : void
+    + setEspecialidad(Especialidad) : void
+    + setCorreo(String) : void
+    + setTurno(String) : void
+    + toString() : String
+  }
+
+  class Cita {
+    - String codigo
+    - Paciente paciente
+    - Medico medico
+    - Consultorio consultorio
+    - String fecha
+    - String hora
+    - String motivo
+    - double costoConsulta
+    - EstadoCita estado
+    ..
+    + getCodigo() : String
+    + getPaciente() : Paciente
+    + getMedico() : Medico
+    + getConsultorio() : Consultorio
+    + getFecha() : String
+    + getHora() : String
+    + getMotivo() : String
+    + getCostoConsulta() : double
+    + getEstado() : EstadoCita
+    + setPaciente(Paciente) : void
+    + setMedico(Medico) : void
+    + setConsultorio(Consultorio) : void
+    + setFecha(String) : void
+    + setHora(String) : void
+    + setMotivo(String) : void
+    + setCostoConsulta(double) : void
+    + setEstado(EstadoCita) : void
+    + toString() : String
+  }
+
+  class Consultorio {
+    - String codigo
+    - String nombre
+    - int piso
+    - Especialidad especialidad
+    - boolean disponible
+    ..
+    + getCodigo() : String
+    + getNombre() : String
+    + getPiso() : int
+    + isDisponible() : boolean
+    + getEspecialidad() : Especialidad
+    + setNombre(String) : void
+    + setPiso(int) : void
+    + setEspecialidad(Especialidad) : void
+    + setDisponible(boolean) : void
+    + toString() : String
+  }
+
+  class Medicamento {
+    - String codigo
+    - String nombre
+    - String categoria
+    - String descripcion
+    - double precio
+    - int stock
+    ..
+    + getCodigo() : String
+    + getNombre() : String
+    + getCategoria() : String
+    + getDescripcion() : String
+    + getPrecio() : double
+    + getStock() : int
+    + setNombre(String) : void
+    + setCategoria(String) : void
+    + setDescripcion(String) : void
+    + setPrecio(double) : void
+    + setStock(int) : void
+    + toString() : String
+  }
+
+  class RegistroTriaje {
+    - static int contador
+    - String codigo
+    - String codigoPaciente
+    - String nombrePaciente
+    - String fecha
+    - double peso
+    - double talla
+    - double temperatura
+    - String presionArterial
+    - int frecuenciaCardiaca
+    - String nivelPrioridad
+    ..
+    + getCodigo() : String
+    + getCodigoPaciente() : String
+    + getNombrePaciente() : String
+    + getFecha() : String
+    + getPeso() : double
+    + getTalla() : double
+    + getTemperatura() : double
+    + getPresionArterial() : String
+    + getFrecuenciaCardiaca() : int
+    + getNivelPrioridad() : String
+  }
+
+  class ConsultaClinica {
+    - static int contador
+    - String codigo
+    - String codigoPaciente
+    - String nombrePaciente
+    - String fecha
+    - String nombreMedico
+    - String especialidad
+    - String diagnostico
+    - String medicamentosRecetados
+    - String observaciones
+    ..
+    + getCodigo() : String
+    + getCodigoPaciente() : String
+    + getNombrePaciente() : String
+    + getFecha() : String
+    + getNombreMedico() : String
+    + getEspecialidad() : String
+    + getDiagnostico() : String
+    + getMedicamentosRecetados() : String
+    + getObservaciones() : String
+    + setDiagnostico(String) : void
+    + setMedicamentosRecetados(String) : void
+    + setObservaciones(String) : void
+    + toString() : String
+  }
+
+  enum Especialidad {
+    MEDICINA_GENERAL
+    PEDIATRIA
+    CARDIOLOGIA
+    DERMATOLOGIA
+    TRAUMATOLOGIA
+    GINECOLOGIA
+    ODONTOLOGIA
+  }
+
+  enum EstadoCita {
+    PROGRAMADA
+    EN_ESPERA
+    ATENDIDA
+    CANCELADA
+  }
+
+  Persona <|-- Paciente
+  Persona <|-- Medico
+
+  Cita *-- Paciente
+  Cita *-- Medico
+  Cita *-- Consultorio
+  Cita *-- EstadoCita
+
+  Medico *-- Especialidad
+  Consultorio *-- Especialidad
+}
+
+' ==================== PAQUETE: ESTRUCTURAS ====================
+package "estructuras" #FFF8F0 {
+
+  class Nodo<T> {
+    {field} T dato
+    {field} Nodo<T> siguiente
+  }
+
+  class NodoDoble<T> {
+    {field} T dato
+    {field} NodoDoble<T> anterior
+    {field} NodoDoble<T> siguiente
+  }
+
+  class ListaEnlazada<T> {
+    - Nodo<T> cabeza
+    - int tamanio
+    ..
+    + agregar(T) : void
+    + obtener(int) : T
+    + tamanio() : int
+    + estaVacia() : boolean
+    + reemplazar(int, T) : void
+    + eliminar(int) : T
+  }
+
+  class ListaDoblementeEnlazada<T> {
+    - NodoDoble<T> cabeza
+    - NodoDoble<T> cola
+    - NodoDoble<T> actual
+    - int tamanio
+    ..
+    + agregarAlFinal(T) : void
+    + irAlInicio() : void
+    + irAlFinal() : void
+    + anterior() : T
+    + siguiente() : T
+    + obtenerActual() : T
+    + hayAnterior() : boolean
+    + haySiguiente() : boolean
+    + tamanio() : int
+    + estaVacia() : boolean
+  }
+
+  interface Pila<T> {
+    + push(T) : void
+    + pop() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+  }
+
+  class PilaEnlazada<T> {
+    - Nodo<T> cima
+    - int tamanio
+    ..
+    + push(T) : void
+    + pop() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+  }
+
+  class PilaArreglo<T> {
+    - T[] elementos
+    - int tope
+    ..
+    + push(T) : void
+    + pop() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+  }
+
+  interface Cola<T> {
+    + enqueue(T) : void
+    + dequeue() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+    + toArray(T[]) : T[]
+  }
+
+  class ColaEnlazada<T> {
+    - Nodo<T> frente
+    - Nodo<T> fin
+    - int tamanio
+    ..
+    + enqueue(T) : void
+    + dequeue() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+    + toArray(T[]) : T[]
+  }
+
+  class ColaArreglo<T> {
+    - T[] elementos
+    - int frente
+    - int fin
+    - int tamanio
+    ..
+    + enqueue(T) : void
+    + dequeue() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+    + toArray(T[]) : T[]
+  }
+
+  class ColaPrioridad<T> {
+    - NodoPrioridad<T> frente
+    - int tamanio
+    - Comparator<<T>> comparador
+    ..
+    + enqueue(T) : void
+    + dequeue() : T
+    + peek() : T
+    + estaVacia() : boolean
+    + tamanio() : int
+    + toArray(T[]) : T[]
+  }
+
+  class ArbolBinarioBusqueda<K extends Comparable, V> {
+    - NodoArbol<K,V> raiz
+    ..
+    + insertar(K, V) : void
+    + buscar(K) : V
+    + eliminar(K) : void
+    + recorridoInorden() : ListaEnlazada<V>
+    + recorridoPreorden() : ListaEnlazada<V>
+    + recorridoPostorden() : ListaEnlazada<V>
+  }
+
+  ListaEnlazada *-- Nodo
+  ListaDoblementeEnlazada *-- NodoDoble
+
+  Pila <|.. PilaEnlazada
+  Pila <|.. PilaArreglo
+  PilaEnlazada *-- Nodo
+
+  Cola <|.. ColaEnlazada
+  Cola <|.. ColaArreglo
+  Cola <|.. ColaPrioridad
+  ColaEnlazada *-- Nodo
+  ColaPrioridad *-- Nodo
+}
+
+' ==================== PAQUETE: DAO ====================
+package "dao" #F0FFF0 {
+
+  interface PacienteDAO {
+    + guardar(Paciente) : void
+    + actualizar(Paciente) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Paciente
+    + buscarPorDni(String) : Paciente
+    + listarTodos() : Paciente[]
+    + total() : int
+    + obtenerInorden() : Paciente[]
+    + obtenerPreorden() : Paciente[]
+    + obtenerPostorden() : Paciente[]
+  }
+
+  interface MedicoDAO {
+    + guardar(Medico) : void
+    + actualizar(Medico) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Medico
+    + listarTodos() : Medico[]
+    + total() : int
+  }
+
+  interface CitaDAO {
+    + guardar(Cita) : void
+    + actualizar(Cita) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Cita
+    + listarTodos() : Cita[]
+    + existeCruce(String, String, String, String, String) : boolean
+    + total() : int
+    + actualizarEstado(String, EstadoCita) : boolean
+  }
+
+  interface ConsultorioDAO {
+    + guardar(Consultorio) : void
+    + actualizar(Consultorio) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Consultorio
+    + listarTodos() : Consultorio[]
+    + listarDisponiblesPorEspecialidad(Especialidad) : Consultorio[]
+    + esCompatible(String, Especialidad) : boolean
+  }
+
+  interface MedicamentoDAO {
+    + listarTodos() : List<Medicamento>
+    + buscarPorCodigo(String) : Medicamento
+    + buscarPorTexto(String) : List<Medicamento>
+    + registrar(String, String, String, double, int) : Medicamento
+    + actualizar(String, String, String, String, double, int) : boolean
+    + eliminar(String) : boolean
+    + total() : int
+  }
+
+  interface TriajeDAO {
+    + setModoPrioridad(boolean) : void
+    + isModoPrioridad() : boolean
+    + registrar(Paciente, String, double, double, double, String, int, String) : RegistroTriaje
+    + atenderSiguiente() : RegistroTriaje
+    + verSiguiente() : RegistroTriaje
+    + listarHistorial() : RegistroTriaje[]
+    + listarEnEspera() : RegistroTriaje[]
+    + totalEnEspera() : int
+    + eliminarPorPaciente(String) : void
+  }
+}
+
+' ==================== PAQUETE: SERVICIOS ====================
+package "servicios" #FFFAF0 {
+
+  class ClinicaSistema {
+    - PacienteServicio pacienteServicio
+    - MedicoServicio medicoServicio
+    - CitaServicio citaServicio
+    - ConsultorioServicio consultorioServicio
+    - MedicamentoDAO medicamentoDAO
+    - TriajeDAO triajeDAO
+    - MemoriaHistorialDAO historialDAO
+    - String modoPersistencia
+    ..
+    + ClinicaSistema()
+    + cargarDatosIniciales() : void
+    + registrarPaciente(...) : Paciente
+    + actualizarPaciente(...) : boolean
+    + eliminarPaciente(String) : boolean
+    + registrarMedico(...) : Medico
+    + actualizarMedico(...) : boolean
+    + eliminarMedico(String) : boolean
+    + registrarConsultorio(...) : Consultorio
+    + actualizarConsultorio(...) : boolean
+    + eliminarConsultorio(String) : boolean
+    + programarCita(...) : Cita
+    + actualizarCita(...) : boolean
+    + eliminarCita(String) : boolean
+    + cambiarEstadoCita(String, EstadoCita) : boolean
+    + buscarPacientePorDniLineal(String) : Paciente
+    + buscarPacientePorDniBinaria(String) : Paciente
+    + buscarMedicoPorCmpLineal(String) : Medico
+    + buscarMedicoPorCmpBinaria(String) : Medico
+    + obtenerPacientesInorden() : Paciente[]
+    + obtenerPacientesPreorden() : Paciente[]
+    + obtenerPacientesPostorden() : Paciente[]
+    + registrarMedicamento(...) : Medicamento
+    + listarMedicamentos(String) : List<Medicamento>
+    + registrarTriaje(...) : RegistroTriaje
+    + atenderSiguienteTriaje() : RegistroTriaje
+    + setModoPrioridadTriaje(boolean) : void
+    + registrarConsultaHistorial(...) : ConsultaClinica
+    + obtenerUltimaConsulta(String) : ConsultaClinica
+    + irAConsultaAnterior(String) : ConsultaClinica
+    + irAConsultaSiguiente(String) : ConsultaClinica
+    + hayConsultaAnterior(String) : boolean
+    + hayConsultaSiguiente(String) : boolean
+    + listarPacientes() : Paciente[]
+    + listarMedicos() : Medico[]
+    + listarCitas() : Cita[]
+    + listarConsultorios() : Consultorio[]
+  }
+
+  class PacienteServicio {
+    - PacienteDAO pacienteDAO
+    - int correlativo
+    ..
+    + registrarPaciente(...) : Paciente
+    + buscarPorDniArbol(String) : Paciente
+    + buscarPorDniLineal(String) : Paciente
+    + buscarPorDniBinaria(String) : Paciente
+    + buscarPorCodigo(String) : Paciente
+    + listarOrdenadosPorNombre() : Paciente[]
+    + listarOrdenadosPorDni() : Paciente[]
+    + actualizarPaciente(...) : boolean
+    + eliminarPaciente(String) : boolean
+    + obtenerInorden() : Paciente[]
+    + obtenerPreorden() : Paciente[]
+    + obtenerPostorden() : Paciente[]
+    + totalPacientes() : int
+  }
+
+  class MedicoServicio {
+    - MedicoDAO medicoDAO
+    - int correlativo
+    ..
+    + registrarMedico(...) : Medico
+    + buscarPorCodigo(String) : Medico
+    + buscarPorCmpLineal(String) : Medico
+    + buscarPorCmpBinaria(String) : Medico
+    + listarOrdenadosPorNombre() : Medico[]
+    + listarOrdenadosPorCmp() : Medico[]
+    + actualizarMedico(...) : boolean
+    + eliminarMedico(String) : boolean
+    + totalMedicos() : int
+  }
+
+  class CitaServicio {
+    - CitaDAO citaDAO
+    - int correlativo
+    ..
+    + programarCita(Paciente, Medico, Consultorio, String, String, String, double) : Cita
+    + buscarPorCodigo(String) : Cita
+    + listarOrdenadasPorFecha() : Cita[]
+    + existeCruce(String, String, String, String, String) : boolean
+    + cambiarEstado(String, EstadoCita) : boolean
+    + actualizarCita(Cita) : boolean
+    + eliminarCita(String) : boolean
+    + totalCitas() : int
+  }
+
+  class ConsultorioServicio {
+    - ConsultorioDAO consultorioDAO
+    - int correlativo
+    ..
+    + registrarConsultorio(String, int, Especialidad) : Consultorio
+    + buscarPorCodigo(String) : Consultorio
+    + listarConsultorios() : Consultorio[]
+    + listarDisponiblesPorEspecialidad(Especialidad) : Consultorio[]
+    + esCompatible(String, Especialidad) : boolean
+    + actualizarConsultorio(...) : boolean
+    + eliminarConsultorio(String) : boolean
+  }
+
+  ClinicaSistema *-- PacienteServicio
+  ClinicaSistema *-- MedicoServicio
+  ClinicaSistema *-- CitaServicio
+  ClinicaSistema *-- ConsultorioServicio
+
+  PacienteServicio --> PacienteDAO
+  MedicoServicio --> MedicoDAO
+  CitaServicio --> CitaDAO
+  ConsultorioServicio --> ConsultorioDAO
+}
+
+' ==================== PAQUETE: PERSISTENCIA ====================
+package "persistencia" #FFF5F5 {
+
+  class ClinicaMemoria {
+    - PacienteDAO pacienteDAO
+    - MedicoDAO medicoDAO
+    - ConsultorioDAO consultorioDAO
+    - CitaDAO citaDAO
+    ..
+    + getPacienteDAO() : PacienteDAO
+    + getMedicoDAO() : MedicoDAO
+    + getConsultorioDAO() : ConsultorioDAO
+    + getCitaDAO() : CitaDAO
+  }
+
+  class ClinicaPostgres {
+    - PacienteDAO pacienteDAO
+    - MedicoDAO medicoDAO
+    - ConsultorioDAO consultorioDAO
+    - CitaDAO citaDAO
+    ..
+    + ClinicaPostgres()
+    + getPacienteDAO() : PacienteDAO
+    + getMedicoDAO() : MedicoDAO
+    + getConsultorioDAO() : ConsultorioDAO
+    + getCitaDAO() : CitaDAO
+  }
+
+  class MemoriaPacienteDAO {
+    - ListaEnlazada<Paciente> pacientes
+    - ArbolBinarioBusqueda<String, Paciente> indicePorDni
+    ..
+    + guardar(Paciente) : void
+    + actualizar(Paciente) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Paciente
+    + buscarPorDni(String) : Paciente
+    + listarTodos() : Paciente[]
+    + total() : int
+    + obtenerInorden() : Paciente[]
+    + obtenerPreorden() : Paciente[]
+    + obtenerPostorden() : Paciente[]
+  }
+
+  class MemoriaMedicoDAO {
+    - ListaEnlazada<Medico> medicos
+    - ArbolBinarioBusqueda<String, Medico> indice
+    ..
+    + guardar(Medico) : void
+    + actualizar(Medico) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Medico
+    + listarTodos() : Medico[]
+    + total() : int
+  }
+
+  class MemoriaConsultorioDAO {
+    - ListaEnlazada<Consultorio> consultorios
+    - ArbolBinarioBusqueda<String, Consultorio> indice
+    ..
+    + guardar(Consultorio) : void
+    + actualizar(Consultorio) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Consultorio
+    + listarTodos() : Consultorio[]
+    + listarDisponiblesPorEspecialidad(Especialidad) : Consultorio[]
+    + esCompatible(String, Especialidad) : boolean
+  }
+
+  class MemoriaCitaDAO {
+    - ListaEnlazada<Cita> citas
+    ..
+    + guardar(Cita) : void
+    + actualizar(Cita) : boolean
+    + eliminar(String) : boolean
+    + buscarPorCodigo(String) : Cita
+    + listarTodos() : Cita[]
+    + existeCruce(...) : boolean
+    + total() : int
+    + actualizarEstado(String, EstadoCita) : boolean
+  }
+
+  class MemoriaMedicamentoDAO {
+    - ArrayList<Medicamento> medicamentos
+    - int correlativo
+    ..
+    + listarTodos() : List<Medicamento>
+    + buscarPorCodigo(String) : Medicamento
+    + buscarPorTexto(String) : List<Medicamento>
+    + registrar(...) : Medicamento
+    + actualizar(...) : boolean
+    + eliminar(String) : boolean
+    + total() : int
+  }
+
+  class MemoriaTriajeDAO {
+    - Cola<RegistroTriaje> colaPacientes
+    - ListaEnlazada<RegistroTriaje> historialTriajes
+    - boolean usarPrioridad
+    ..
+    + setModoPrioridad(boolean) : void
+    + isModoPrioridad() : boolean
+    + registrar(Paciente, String, double, double, double, String, int, String) : RegistroTriaje
+    + atenderSiguiente() : RegistroTriaje
+    + verSiguiente() : RegistroTriaje
+    + listarHistorial() : RegistroTriaje[]
+    + listarEnEspera() : RegistroTriaje[]
+    + totalEnEspera() : int
+    + eliminarPorPaciente(String) : void
+  }
+
+  class MemoriaHistorialDAO {
+    - Map<String, ListaDoblementeEnlazada<ConsultaClinica>> historialPorPaciente
+    ..
+    + registrarConsulta(...) : ConsultaClinica
+    + obtenerUltimaConsulta(String) : ConsultaClinica
+    + irAConsultaAnterior(String) : ConsultaClinica
+    + irAConsultaSiguiente(String) : ConsultaClinica
+    + hayConsultaAnterior(String) : boolean
+    + hayConsultaSiguiente(String) : boolean
+    + totalConsultas(String) : int
+    + tieneHistorial(String) : boolean
+    + eliminarHistorial(String) : void
+  }
+
+  class ConexionPostgres {
+    {static} + obtenerConexion() : Connection
+    {static} + validarConexionYEsquema() : void
+  }
+
+  class PostgresPacienteDAO
+  class PostgresMedicoDAO
+  class PostgresConsultorioDAO
+  class PostgresCitaDAO
+  class PostgresMedicamentoDAO
+  class PostgresTriajeDAO
+
+  PacienteDAO <|.. MemoriaPacienteDAO
+  PacienteDAO <|.. PostgresPacienteDAO
+  MedicoDAO <|.. MemoriaMedicoDAO
+  MedicoDAO <|.. PostgresMedicoDAO
+  ConsultorioDAO <|.. MemoriaConsultorioDAO
+  ConsultorioDAO <|.. PostgresConsultorioDAO
+  CitaDAO <|.. MemoriaCitaDAO
+  CitaDAO <|.. PostgresCitaDAO
+  MedicamentoDAO <|.. MemoriaMedicamentoDAO
+  MedicamentoDAO <|.. PostgresMedicamentoDAO
+  TriajeDAO <|.. MemoriaTriajeDAO
+  TriajeDAO <|.. PostgresTriajeDAO
+
+  MemoriaPacienteDAO --> ListaEnlazada
+  MemoriaPacienteDAO --> ArbolBinarioBusqueda
+  MemoriaMedicoDAO --> ListaEnlazada
+  MemoriaMedicoDAO --> ArbolBinarioBusqueda
+  MemoriaConsultorioDAO --> ListaEnlazada
+  MemoriaConsultorioDAO --> ArbolBinarioBusqueda
+  MemoriaCitaDAO --> ListaEnlazada
+  MemoriaTriajeDAO --> Cola
+  MemoriaHistorialDAO --> ListaDoblementeEnlazada
+}
+
+' ==================== PAQUETE: UTILIDADES ====================
+package "utilidades" #F5F5FF {
+
+  class OrdenamientosBusqueda {
+    {static} + ordenarPacientesPorNombre(Paciente[]) : void
+    {static} + ordenarPacientesPorDniInsercion(Paciente[]) : void
+    {static} + ordenarMedicosPorNombre(Medico[]) : void
+    {static} + ordenarMedicosPorCmpSeleccion(Medico[]) : void
+    {static} + ordenarCitasPorFecha(Cita[]) : void
+    {static} + ordenarConsultoriosPorPiso(Consultorio[]) : void
+    {static} + busquedaLinealPacientePorDni(Paciente[], String) : int
+    {static} + busquedaBinariaPacientePorDni(Paciente[], String) : int
+    {static} + busquedaLinealMedicoPorCmp(Medico[], String) : int
+    {static} + busquedaBinariaMedicoPorCmp(Medico[], String) : int
+  }
+
+  class ProjectPaths {
+    {static} + resolveProject(String, String) : Path
+    {static} + getProjectRoot() : Path
+  }
+}
+
+' ==================== PAQUETE: CONFIG ====================
+package "config" #FFFFF0 {
+
+  class AppConfig {
+    - static AppConfig INSTANCE
+    - Properties properties
+    ..
+    {static} + get() : AppConfig
+    + getPersistenceMode() : PersistenceMode
+    + getPostgresUrl() : String
+    + getPostgresUser() : String
+    + getPostgresPassword() : String
+  }
+
+  enum PersistenceMode {
+    MEMORY
+    POSTGRES
+    {static} + from(String) : PersistenceMode
+  }
+
+  AppConfig *-- PersistenceMode
+}
+
+' ==================== PAQUETE: VISTA ====================
+package "vista" #F5F0FF {
+
+  class ventanaprincipal {
+    - ClinicaSistema sistema
+    ..
+    + ventanaprincipal(ClinicaSistema)
+  }
+
+  class ventanalogin {
+    {static} + mostrar(Component) : boolean
+  }
+
+  class ventanacarga {
+    + mostrarBrevemente(Runnable) : void
+  }
+
+  class temaaplicacion
+  class fuentesinterfaz
+  class panelredondeado
+  class panelfondo
+  class panelencabezado
+  class panelvidrio
+  class botonlateral
+  class tarjetaresumen
+  class scrollredondeado
+}
+
+' ==================== PAQUETE: MAIN ====================
+package "clinicamedica" #FFFFFF {
+
+  class ClinicaMedica {
+    {static} + main(String[]) : void
+  }
+}
+
+' ==================== RELACIONES ENTRE PAQUETES ====================
+
+ClinicaSistema --> MedicamentoDAO
+ClinicaSistema --> TriajeDAO
+ClinicaSistema --> MemoriaHistorialDAO
+
+ClinicaPostgres --> ConexionPostgres
+ClinicaPostgres ..> PostgresPacienteDAO : <<create>>
+ClinicaPostgres ..> PostgresMedicoDAO : <<create>>
+ClinicaPostgres ..> PostgresConsultorioDAO : <<create>>
+ClinicaPostgres ..> PostgresCitaDAO : <<create>>
+
+ClinicaMemoria ..> MemoriaPacienteDAO : <<create>>
+ClinicaMemoria ..> MemoriaMedicoDAO : <<create>>
+ClinicaMemoria ..> MemoriaConsultorioDAO : <<create>>
+ClinicaMemoria ..> MemoriaCitaDAO : <<create>>
+
+MemoriaTriajeDAO --> ColaEnlazada
+MemoriaTriajeDAO --> ColaPrioridad
+MemoriaTriajeDAO --> ListaEnlazada
+
+ClinicaMedica --> ventanacarga
+ClinicaMedica --> ventanalogin
+ClinicaMedica --> ventanaprincipal
+ventanaprincipal --> ClinicaSistema
+
+AppConfig --> ProjectPaths
+
+OrdenamientosBusqueda --> Paciente
+OrdenamientosBusqueda --> Medico
+OrdenamientosBusqueda --> Cita
+OrdenamientosBusqueda --> Consultorio
+
+' ==================== LEYENDA ====================
+legend left
+  **ATE-SALUD - Diagrama UML (Avance 3)**
+  Grupo 6 - Estructura de Datos y Algoritmos
+  Integrantes: Prado Torres Axel, Mejia Huanuqueno Alex,
+  Molina Gilbonio Diego, Loa Rojas Jahn, Matos Chamorro Franklin
+  Docente: Astuhuaman Beraun Elvis Alberto
+endlegend
+
+@enduml
